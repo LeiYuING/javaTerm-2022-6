@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leiyu.mapper.StudentMapper">
+    <update id="addClassSum" parameterType="int">
+        update classes set ssum=ssum+1 where id=#{id}
+    </update>
+    
+    <insert id="addStudent" parameterType="student">
+        insert into students (sname, gender, age, cname)
+        values (#{sname},#{gender},#{age},#{cname});
+    </insert>
+
+    <update id="addPhoto" parameterType="map">
+        update students set photo=#{photo} where id=#{id}
+    </update>
+
+    <delete id="deleteStudentById" parameterType="Integer">
+        delete from students where id=#{id}
+    </delete>
+
+    <update id="modStudent" parameterType="student">
+        update students set sname=#{sname},gender=#{gender},age=#{age},cname=#{cname} where id=#{id}
+    </update>
+
+    <select id="getAllStudent" resultType="student" parameterType="student">
+        select * from students
+        <where>
+            <if test="sname!=null">
+                sname like "%"#{sname}"%"
+            </if>
+            <if test="cname!=null">
+              and  cname like "%"#{cname}"%"
+            </if>
+        </where>
+    </select>
+</mapper>

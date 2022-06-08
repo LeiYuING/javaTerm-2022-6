@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.leiyu.mapper.ClassMapper">
+    <resultMap id="classMap" type="classes">
+        <result property="className" column="class_name"/>
+    </resultMap>
+    <select id="getAllClass" resultMap="classMap">
+        select * from classes
+    </select>
+
+    <insert id="addClass" parameterType="classes">
+        insert into classes(`class_name`) values (#{className})
+    </insert>
+
+    <delete id="deleteClassById" parameterType="Integer">
+        delete from classes where id = #{id}
+    </delete>
+
+    <update id="modClass" parameterType="classes">
+        update classes set class_name=#{className} where id=#{id}
+    </update>
+
+    <select id="getClassById" parameterType="Integer" resultMap="classMap">
+        select * from classes where id=#{id}
+    </select>
+
+</mapper>
